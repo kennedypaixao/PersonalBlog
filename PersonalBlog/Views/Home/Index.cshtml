@@ -1,8 +1,28 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+	ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+	<h1 class="display-4">Welcome</h1>
+	<p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+
+<div class="blog-list card-columns" id="blog-list"></div>
+<div id="blog-item-container"></div>
+
+<script id="blog-card" type="text/template">
+	<div class="card">
+		<div class="card-body">
+			<h5 class="card-title">{{PostId}} - {{Title}}</h5>
+			<p class="card-text">{{ShortDescription}}</p>
+			<button class="btn btn-primary">Ir</button>
+		</div>
+	</div>
+</script>
+
+<script id="blog-item" type="text/template">
+	<div id="{{Link}}" class="blog-item">
+		{{Content}}
+	</div>
+	<a href="#blog-title" class="btn btn-primary">Voltar</a>
+</script>
