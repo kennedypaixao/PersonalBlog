@@ -8,6 +8,13 @@
 </div>
 
 <div class="blog-list card-columns" id="blog-list"></div>
+
+<div class="center">
+	<button class="btn btn-primary" onclick="pageEvents.loadMoreBlogPosts();">Carregar Posts Anteriores</button>
+	<br />
+	<br />
+</div>
+
 <div id="blog-item-container"></div>
 
 <script id="blog-card" type="text/template">
@@ -15,7 +22,7 @@
 		<div class="card-body">
 			<h5 class="card-title">{{PostId}} - {{Title}}</h5>
 			<p class="card-text">{{ShortDescription}}</p>
-			<button class="btn btn-primary">Ir</button>
+			<button class="btn btn-primary" onclick="pageEvents.loadBlogPost('{{Link}}');">Ir</button>
 		</div>
 	</div>
 </script>

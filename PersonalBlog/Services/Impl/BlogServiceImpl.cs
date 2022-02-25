@@ -2,6 +2,7 @@
 using PersonalBlog.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -38,14 +39,29 @@ namespace PersonalBlog.Services.Impl
             }
         }
 
+        private List<BlogPost> GetLastOrderingPosts(IEnumerable<BlogPost> query)
+        {
+            return query.OrderByDescending(e => e.PostId).Take(3).ToList();
+        }
+
         public List<BlogPost> GetLatestPosts()
 		{
-			return Posts.OrderBy(e => e.PostId).Take(3).ToList();
+            return GetLastOrderingPosts(Posts);
 		}
+
+		public List<BlogPost> GetOlderPosts(int olderBlogPostId)
+		{
+            var query = Posts.Where(p => p.PostId < olderBlogPostId);
+            var posts = GetLastOrderingPosts(query);
+
+            return posts;
+        }
 
 		public string GetPostText(string link)
 		{
-			throw new NotImplementedException();
+            var post = Posts.FirstOrDefault(p => p.Link == link);
+
+            return File.ReadAllText($"{_env.ContentRootPath}/wwwroot/Posts/{post.PostId}_post.md");
 		}
 	}
 }

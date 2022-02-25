@@ -21,8 +21,17 @@
 		$("#blog-list").append(cardHtml);
 	}
 
+	const showBlogItem = (html, link) => {
+		let template = $('#blog-item').html();
+		template = template.replace('{{Link}}', link);
+		template = template.replace('{{Content}}', html);
+
+		$("#blog-item-container").html(template);
+	}
+
 	return {
-		appendBlogList: appendBlogList
+		appendBlogList: appendBlogList,
+		showBlogItem: showBlogItem
 	}
 
 });
