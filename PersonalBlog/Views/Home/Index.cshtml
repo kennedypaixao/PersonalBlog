@@ -7,14 +7,12 @@
 	<p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
 
-<div class="alert alert-info show" id="connection-status">
-
-</div>
+<div class="alert alert-info show" id="connection-status"></div>
 
 <div class="blog-list card-columns" id="blog-list"></div>
 
 <div class="center">
-	<button class="btn btn-primary" onclick="pageEvents.loadMoreBlogPosts();">Carregar Posts Anteriores</button>
+	<button class="btn btn-primary" onclick="pageEvents.loadMoreBlogPosts();" id="btn-carregar-mais">Carregar Posts Anteriores</button>
 	<br />
 	<br />
 </div>
@@ -36,4 +34,16 @@
 		{{Content}}
 	</div>
 	<a href="#blog-title" class="btn btn-primary">Voltar</a>
+</script>
+
+<script id="blog-content-not-found" type="text/template">
+	<h1>
+		Ups, artigo não encontrado no cache!
+	</h1>
+
+	<div>
+		Você quer que nos continuemos tentando fazer o donwload do artigo em plano de fundo e te comunicar quando estiver disponível ?
+		<br />
+		<button class="btn btn-success">Sim!</button>
+	</div>
 </script>

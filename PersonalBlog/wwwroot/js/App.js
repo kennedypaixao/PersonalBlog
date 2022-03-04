@@ -1,4 +1,5 @@
-﻿var blogService = require('./BlogService.js');
+﻿const blogService = require('./BlogService.js');
+const serviceWorker = require('./SwRegister.js');
 
 blogService.loadLatestBlogPosts();
 
