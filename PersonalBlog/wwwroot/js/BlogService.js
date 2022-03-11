@@ -38,7 +38,7 @@
 			template.showBlogItem(html, link);
 			window.location = '#' + link;
 		} else {
-			const emptyState = $("#blog-content-not-found").html();
+			const emptyState = $("#blog-content-not-found").html().replace(/{{Link}}/g, link);;
 			template.showBlogItem(emptyState, link);
 			window.location = "#blog-content-not-found";
 		}
