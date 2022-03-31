@@ -4,28 +4,40 @@
 	const blogPostUrl = '/Home/Post/?link=';
 	const loadMorePostsUrl = '/Home/MoreBlogPosts/?oldestBlogPostId=';
 
+	const hasConnection = () => {
+		if ('onLine' in navigator) {
+			return navigator.onLine;
+		}
+
+		return true;
+	}
+
 	const loadData = async (url, link, isText) => {
 		let connectionStatus = '';
 		link = link || '';
 
 		try {
-			const response = await fetch(url + link);
+			if (hasConnection()) {
+				const response = await fetch(url + link);
 
-			if (isText) {
-				const text = await response.text();
-				await clienteStorage.addPostText(link, text);
+				if (isText) {
+					const text = await response.text();
+					await clienteStorage.addPostText(link, text);
+				} else {
+					const json = await response.json();
+					await clienteStorage.addPost(json);
+				}
+
+				connectionStatus = 'Conexão com a API ok';
 			} else {
-				const json = await response.json();
-				await clienteStorage.addPost(json);
+				connectionStatus = 'Não foi possivel buscar dados da API, vamos seguir offline';
 			}
-			
-			connectionStatus = 'Conexão com a API ok';
 		} catch (e) {
 			console.error('Erro ao carregar o data', e);
 			connectionStatus = 'Não foi possivel buscar dados da API, vamos seguir offline';
 		}
 
-		$("#connection-status").html(connectionStatus);
+		$("#connection-message").html(connectionStatus);
 	}
 
 	const loadBlogPost = async (link) => {
@@ -50,6 +62,7 @@
 		if (posts && posts.length > 0) {
 			const oldestBlogPostId = clienteStorage.getOldestBlogPostId();
 			template.appendBlogList(posts, oldestBlogPostId);
+			$("#connection-status").html('Dados em cache para serem consumidos');
 		} else {
 			$("#connection-status").html('Não há mais posts em cache para exibir');
 			window.location = "#connection-status";

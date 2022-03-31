@@ -78,7 +78,7 @@ window.pageEvents = {
 	getGeolocation: () => {
 		localization.getGeolocation();
 	},
-	vibrate: function () {
+	vibrate: () => {
 		if ('vibrate' in navigator) {
 			navigator.vibrate = navigator.vibrate || navigator.webkitVibrate || navigator.mozVibrate || navigator.msVibrate;
 			navigator.vibrate([1000]);
