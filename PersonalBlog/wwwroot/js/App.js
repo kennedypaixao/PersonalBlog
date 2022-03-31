@@ -1,5 +1,7 @@
 ﻿const blogService = require('./BlogService.js');
 const serviceWorker = require('./SwRegister.js');
+const localization = require('./Localization.js');
+const gyroscope = require('./Gyroscope.js');
 
 let defferedPrompt;
 
@@ -72,5 +74,17 @@ window.pageEvents = {
 				$('#status-download > .progress > .progress-bar').css('width', '100%');
 			}
 		});
+	},
+	getGeolocation: () => {
+		localization.getGeolocation();
+	},
+	vibrate: function () {
+		if ('vibrate' in navigator) {
+			navigator.vibrate = navigator.vibrate || navigator.webkitVibrate || navigator.mozVibrate || navigator.msVibrate;
+			navigator.vibrate([1000]);
+		}
 	}
 }
+
+gyroscope.init();
+gyroscope.animate();

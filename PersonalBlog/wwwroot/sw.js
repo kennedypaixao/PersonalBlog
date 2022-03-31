@@ -28,7 +28,9 @@ const blogCacheFiles = [
 	'/js/BlogService.js',
 	'/js/SwRegister.js',
 	'/js/ClienteStorage.js',
-	'/js/Template.js'
+	'/js/Template.js',
+	'/js/Localization.js',
+	'/js/Gyroscope.js',
 ];
 
 function timeout(ms, promise) {
